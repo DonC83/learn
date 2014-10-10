@@ -1,6 +1,8 @@
+package com.donc.api;
 
-package com.donc;
+import com.donc.services.TestTableService;
 
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -9,6 +11,9 @@ import javax.ws.rs.Produces;
  */
 @Path("/myresource")
 public class MyResource {
+
+    @Inject
+    private TestTableService testTableService;
     
     /** Method processing HTTP GET requests, producing "text/plain" MIME media
      * type.
@@ -17,6 +22,7 @@ public class MyResource {
     @GET 
     @Produces("text/plain")
     public String getIt() {
+        System.out.println(testTableService);
         return "Hi there!";
     }
 }

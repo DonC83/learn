@@ -1,0 +1,10 @@
+README
+
+This project is an example of how I setup a RESTful application using Jersey 1.x and Guice 3.0.
+I use Guice as the DI framework for injection purposes.
+
+To generate this project from scratch run the following maven command
+
+mvn archetype:generate -DarchetypeArtifactId=jersey-quickstart-webapp -DarchetypeGroupId=com.sun.jersey.archetypes
+-DarchetypeVersion=1.18.1
+
