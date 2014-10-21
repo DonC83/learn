@@ -1,9 +1,6 @@
 package com.donc.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Date: 2014/10/09
@@ -13,6 +10,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "testtable")
+@SequenceGenerator(name = "SEQ_GEN", sequenceName = "testtable_seq", allocationSize = 1, initialValue = 1)
 public class TestTable {
 
     private int id;
@@ -20,6 +18,7 @@ public class TestTable {
 
     @Id
     @Column(name = "id", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN")
     public int getId() {
         return id;
     }

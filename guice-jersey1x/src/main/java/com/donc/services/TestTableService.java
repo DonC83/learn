@@ -10,6 +10,7 @@ import com.donc.entities.TestTable;
  */
 public interface TestTableService {
 
-    void add(String text);
+    int add(String text);
     TestTable getTestTable(int id);
+    void deleteText(String text);
 }

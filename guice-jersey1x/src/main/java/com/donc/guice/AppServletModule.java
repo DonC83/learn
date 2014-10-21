@@ -22,7 +22,9 @@ public class AppServletModule extends ServletModule {
 
 
         Map<String, String> params = newHashMap();
+//        ;org.codehaus.jackson.jaxrs
         params.put("com.sun.jersey.config.property.packages","com.donc.api");
+        params.put("com.sun.jersey.api.json.POJOMappingFeature","true");
         serve("/webapi/*").with(GuiceContainer.class, params);
 
     }
