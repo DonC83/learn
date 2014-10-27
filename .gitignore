@@ -2,4 +2,5 @@ out/
 .idea/
 *.ipr
 *.iml
+.log
 target/

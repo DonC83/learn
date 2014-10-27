@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+    <persistence-unit name="testPU">
+        <class>com.donc.entities.TestTable</class>
+        <properties>
+            <property name="javax.persistence.spi.PersistenceProvider" value="org.hibernate.jpa.HibernatePersistenceProvider" />
+            <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" />
+            <!--<property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:hsql://localhost:9001/rest_learn" />-->
+            <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:testdb" />
+            <property name="javax.persistence.jdbc.username" value="SA"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+        </properties>
+    </persistence-unit>
+</persistence>
