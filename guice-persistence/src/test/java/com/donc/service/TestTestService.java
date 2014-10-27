@@ -17,6 +17,9 @@ import static org.junit.Assert.*;
  */
 public class TestTestService {
 
+    /**
+     * This injector needs to be declared as static for the test otherwise junit will attempt to reinitialise it.
+     */
     private final static Injector in = Guice.createInjector(new AppModule());
 
     private TestService service;
@@ -40,13 +43,12 @@ public class TestTestService {
 
     @Test
     public void testGet() throws Exception {
-        assertTrue(id>0);
-        TestTable tt = service.get(id);
-        if (tt==null) {
-            tt = new TestTable();
-            tt.setText(text);
-            tt = service.create(tt);
-        }
+        TestTable tt = service.get(2);
+        assertNull(tt);
+        tt = new TestTable();
+        tt.setText(text);
+        tt = service.create(tt);
+        tt = service.get(tt.getId());
         assertNotNull(tt);
         assertEquals(text, tt.getText());
     }

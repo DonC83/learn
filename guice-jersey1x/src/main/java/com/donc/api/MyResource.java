@@ -2,36 +2,39 @@ package com.donc.api;
 
 import com.donc.entities.TestTable;
 import com.donc.objects.TestDTO;
-import com.donc.services.TestTableService;
-import com.donc.services.TestTableServiceImpl;
+import com.donc.services.TestService;
+import com.sun.jersey.api.NotFoundException;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Example resource class hosted at the URI path "/myresource"
  */
 @Path("/myresource")
+@Produces(MediaType.TEXT_PLAIN)
 public class MyResource {
 
     @Inject
-    private TestTableService testTableService;
-    
+    private TestService testTableService;
+
     /** Method processing HTTP GET requests, producing "text/plain" MIME media
      * type.
      * @return String that will be send back as a response of type "text/plain".
      */
-    @GET 
-    @Produces("text/plain")
+    @GET
     public String getIt(@Context SecurityContext sc) {
         return "Hi there!";
     }
 
     @GET
     @Path("{id}")
-    @Produces(MediaType.TEXT_PLAIN)
     public String getIt(@PathParam("id") int id) {
         TestTable tt = testTableService.getTestTable(id);
+        if (tt==null)
+            throw new NotFoundException("Entity TestTable with ID=" + id + " not found.");
         return tt.getText();
     }
 
@@ -43,29 +46,24 @@ public class MyResource {
         return Response.created(UriBuilder.fromPath("/{id}").build(id)).build();
     }
 
+    @GET
+    @Path("all")
+    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+    public List<TestDTO> getAll() {
+        List<TestDTO> testDTOs = new ArrayList<TestDTO>();
+        for (TestTable tt : testTableService.getAll()) {
+            testDTOs.add(new TestDTO(tt.getId(), tt.getText()));
+        }
+        return testDTOs;
+    }
+
     @DELETE
     @Consumes(MediaType.TEXT_PLAIN)
-    @Path("text/delete/{text}")
+    @Path("text/delete/}")
     public Response deleteText(@PathParam("text") String text) {
         testTableService.deleteText(text);
         return Response.noContent().build();
     }
 
-    @GET
-    @Path("json/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public TestDTO getJson(@PathParam("id") int id) {
-        TestTable tt = testTableService.getTestTable(id);
-        TestDTO t = new TestDTO();
-        t.setText(tt.getText());
-        return t;
-    }
 
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path("json")
-    public Response addJsonText(TestDTO testDTO) {
-        int id = testTableService.add(testDTO.getText());
-        return Response.created(UriBuilder.fromPath("/{id}").build(id)).build();
-    }
 }

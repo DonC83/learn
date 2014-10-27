@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author <a href="mailto:donovan.chong@gmail.com">Donovan</a>
  */
-public class TestTableServiceImpl implements TestTableService {
+public class TestServiceImpl implements TestService {
 
     @Inject
     private EntityManager em;
@@ -29,9 +29,22 @@ public class TestTableServiceImpl implements TestTableService {
         return testTable.getId();
     }
 
+
     @Override
     public TestTable getTestTable(int id) {
         return em.find(TestTable.class, id);
+    }
+
+    @Override
+    public List<TestTable> getAll() {
+        return em.createNativeQuery("select * from testtable", TestTable.class).getResultList();
+    }
+
+    @Override
+    @Transactional
+    public void deleteText(int id) {
+        TestTable tt = getTestTable(id);
+        em.remove(tt);
     }
 
     @Override

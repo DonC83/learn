@@ -1,11 +1,9 @@
 package com.donc.api;
 
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientHandler;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.test.framework.JerseyTest;
-import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -51,6 +49,14 @@ public class TestMyResource extends JerseyTest {
         } catch (Exception e) {
             fail(e.getMessage());
         }
+    }
+
+    @Test
+    public void testGetAll() throws Exception {
+        WebResource resource = c.resource(url);
+        String response = resource.path("myresource/all").get(String.class);
+        System.out.println(response);
+
     }
 
     @Test

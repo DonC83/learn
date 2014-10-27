@@ -54,7 +54,15 @@
                     <!--</dependency>-->
                 <!--</dependencies>-->
             <!--</plugin>-->
-
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <port>8080</port>
+                    <path>/</path>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
@@ -68,6 +76,12 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.3.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -91,12 +105,7 @@
             <version>${jersey.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.glassfish.extras</groupId>
-            <artifactId>glassfish-embedded-web</artifactId>
-            <version>${glassfish.version}</version>
-            <scope>test</scope>
-        </dependency>
+
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -137,6 +146,13 @@
             <artifactId>postgresql</artifactId>
             <version>${postgres.version}</version>
         </dependency>
+        <!--This glassfish dependency overwrites hibernate with eclipselink if you add it before hibernate for some reason-->
+        <!--<dependency>-->
+            <!--<groupId>org.glassfish.extras</groupId>-->
+            <!--<artifactId>glassfish-embedded-web</artifactId>-->
+            <!--<version>${glassfish.version}</version>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
     </dependencies>
 
 </project>

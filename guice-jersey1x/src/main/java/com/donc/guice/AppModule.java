@@ -1,7 +1,7 @@
 package com.donc.guice;
 
-import com.donc.services.TestTableService;
-import com.donc.services.TestTableServiceImpl;
+import com.donc.services.TestService;
+import com.donc.services.TestServiceImpl;
 import com.google.inject.AbstractModule;
 import com.google.inject.persist.jpa.JpaPersistModule;
 
@@ -15,8 +15,8 @@ public class AppModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        install(new JpaPersistModule("rest-learn"));
+        install(new JpaPersistModule("testPU"));
 
-        bind(TestTableService.class).to(TestTableServiceImpl.class);
+        bind(TestService.class).to(TestServiceImpl.class);
     }
 }
