@@ -3,7 +3,6 @@ package com.donc.api;
 import com.donc.entities.TestTable;
 import com.donc.objects.TestDTO;
 import com.donc.services.TestService;
-import com.sun.jersey.api.NotFoundException;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;

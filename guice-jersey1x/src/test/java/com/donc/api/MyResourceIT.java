@@ -4,6 +4,7 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.test.framework.JerseyTest;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -14,12 +15,12 @@ import static org.junit.Assert.*;
  *
  * @author <a href="mailto:donovan.chong@gmail.com">Donovan</a>
  */
-public class TestMyResource extends JerseyTest {
+public class MyResourceIT extends JerseyTest {
 
     private final String url = "http://localhost:8080/webapi/";
     private static Client c;
 
-    public TestMyResource()  {
+    public MyResourceIT()  {
         super("com.donc.api");
         //This does not seem to be required
 //        Map<String,Object> p = cc.getProperties();
@@ -63,8 +64,7 @@ public class TestMyResource extends JerseyTest {
     public void testDeleteText() throws Exception {
         WebResource resource = c.resource(url);
         try {
-
-            resource.path("myresource/text/delete").queryParam("text", "Testing post on resource").delete();
+            resource.path("myresource/").queryParam("text", "Testing post on resource").delete();
         } catch (Exception e) {
             fail(e.getMessage());
         }

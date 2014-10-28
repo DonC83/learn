@@ -1,4 +1,4 @@
-README
+## README
 
 This project is an example of how I setup a RESTful application using Jersey 1.x and Guice 3.0.
 I use Guice as the DI framework for injection purposes.
@@ -19,3 +19,5 @@ The archetype automatically adds the following dependency into the pom :
 If you are not using glassfish to do your testing I would suggest removing it or commenting it out, it seems to cause
 eclipselink to overwrite hibernate as the orm persistence provider when running tests, but only if it's placed above
 hibernate dependency in the pom file.
+
+The project using tomcat's maven plugin to allow the build to run integration tests against the rest services exposed.

@@ -1,6 +1,7 @@
 package com.donc.api;
 
 import com.sun.jersey.test.framework.JerseyTest;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -9,7 +10,8 @@ import org.junit.Test;
  *
  * @author <a href="mailto:donovan.chong@gmail.com">Donovan</a>
  */
-public class TestJsonResource extends JerseyTest {
+@Ignore
+public class JsonResourceIT extends JerseyTest {
 
     @Test
     public void testGet() throws Exception {
