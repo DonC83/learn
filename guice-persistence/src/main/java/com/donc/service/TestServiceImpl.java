@@ -5,6 +5,7 @@ import com.google.inject.persist.Transactional;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Date: 2014/10/27
@@ -20,6 +21,7 @@ public class TestServiceImpl implements TestService {
     @Override
     @Transactional
     public TestTable create(TestTable testTable) {
+        checkNotNull(testTable, "Unable to create null object to table");
         em.persist(testTable);
         return testTable;
     }
@@ -27,6 +29,7 @@ public class TestServiceImpl implements TestService {
     @Override
     @Transactional
     public void update(TestTable testTable) {
+        checkNotNull(testTable, "Unable to update null object in table");
         TestTable obj = this.get(testTable.getId());
         if (obj==null)
             return;

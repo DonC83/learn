@@ -6,6 +6,7 @@ import org.jvnet.hk2.guice.bridge.api.GuiceBridge;
 import org.jvnet.hk2.guice.bridge.api.GuiceIntoHK2Bridge;
 
 import javax.inject.Inject;
+import javax.ws.rs.ApplicationPath;
 
 /**
  * Date: 2014/10/28
@@ -13,6 +14,7 @@ import javax.inject.Inject;
  *
  * @author <a href="mailto:donovan.chong@gmail.com">Donovan</a>
  */
+@ApplicationPath("webapi")
 public class AppConfig extends ResourceConfig {
 
     @Inject

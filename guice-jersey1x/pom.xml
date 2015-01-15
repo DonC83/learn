@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.donc</groupId>
     <artifactId>guice-jersey1x</artifactId>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>guice-jersey1x</name>
 
@@ -27,8 +27,8 @@
                 <version>3.1</version>
                 <inherited>true</inherited>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <!-- Run the application using "mvn embedded-glassfish:run" -->
@@ -166,6 +166,11 @@
             <artifactId>postgresql</artifactId>
             <version>${postgres.version}</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>jax.ws.rs</groupId>-->
+            <!--<artifactId>jax-rs</artifactId>-->
+            <!--<version>1.13</version>-->
+        <!--</dependency>-->
         <!--This glassfish dependency overwrites hibernate with eclipselink if you add it before hibernate for some reason-->
         <!--<dependency>-->
             <!--<groupId>org.glassfish.extras</groupId>-->

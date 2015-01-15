@@ -64,7 +64,7 @@ public class MyResourceIT extends JerseyTest {
     public void testDeleteText() throws Exception {
         WebResource resource = c.resource(url);
         try {
-            resource.path("myresource/").queryParam("text", "Testing post on resource").delete();
+            resource.path("myresource/id/").delete("text");
         } catch (Exception e) {
             fail(e.getMessage());
         }

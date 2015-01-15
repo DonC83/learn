@@ -57,11 +57,11 @@ public class MyResource {
         return testDTOs;
     }
 
-    @Path("{text}")
+    @Path("id/{id}")
     @DELETE
-    public Response deleteText(@PathParam("text")String text) {
+    public void deleteText(@PathParam("id")String text) {
         testTableService.deleteText(text);
-        return Response.noContent().build();
+//        return Response.noContent().build();
     }
 
 
