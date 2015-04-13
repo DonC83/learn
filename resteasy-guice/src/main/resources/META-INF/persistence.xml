@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="NWTrustPU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <class>za.co.nwtrust.entities.ClaimStatus</class>
+        <class>za.co.nwtrust.entities.ClaimType</class>
+        <class>za.co.nwtrust.entities.Claim</class>
+
+        <class>za.co.nwtrust.entities.Client</class>
+        <class>za.co.nwtrust.entities.Company</class>
+        <class>za.co.nwtrust.entities.Note</class>
+        <class>za.co.nwtrust.entities.PolicyType</class>
+        <class>za.co.nwtrust.entities.Provider</class>
+        <class>za.co.nwtrust.entities.Policy</class>
+        <class>za.co.nwtrust.entities.User</class>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://127.0.0.1:5432/nwtrust?user=donovan"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL9Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <!--<property name="connection.autocommit" value="true" />-->
+            <!--<property name="hibernate.hbm2ddl.auto" value="create-drop"/>-->
+            <property name="hibernate.id.new_generator_mappings" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>
