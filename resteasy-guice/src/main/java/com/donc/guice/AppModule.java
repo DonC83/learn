@@ -1,8 +1,8 @@
 package com.donc.guice;
 
-import com.donc.resources.HelloResource;
-import com.donc.service.ClientService;
-import com.donc.service.impl.ClientServiceImpl;
+import com.donc.resources.TestResource;
+import com.donc.service.TestService;
+import com.donc.service.impl.TestServiceImpl;
 import com.google.inject.AbstractModule;
 
 /**
@@ -22,9 +22,7 @@ public class AppModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        bind(ClientService.class).to(ClientServiceImpl.class);
-        bind(HelloResource.class);
-
-
+        bind(TestService.class).to(TestServiceImpl.class);
+        bind(TestResource.class);
     }
 }

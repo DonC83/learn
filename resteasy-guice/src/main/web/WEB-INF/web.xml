@@ -7,26 +7,46 @@
 
     <display-name>Guice Hello</display-name>
 
+    <!--<filter>-->
+        <!--<filter-name>guiceFilter</filter-name>-->
+        <!--<filter-class>com.google.inject.servlet.GuiceFilter</filter-class>-->
+    <!--</filter>-->
+
+    <!--<filter-mapping>-->
+        <!--<filter-name>guiceFilter</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+
+    <!--<listener>-->
+        <!--<listener-class>com.donc.guice.AppServletConfig</listener-class>-->
+    <!--</listener>-->
+
     <context-param>
         <param-name>resteasy.guice.modules</param-name>
-        <param-value>com.donc.guice.HelloModule</param-value>
+        <param-value>com.donc.guice.AppModule</param-value>
     </context-param>
+
+    <!--<listener>-->
+        <!--<listener-class>-->
+            <!--org.jboss.resteasy.plugins.guice.GuiceResteasyBootstrapServletContextListener-->
+        <!--</listener-class>-->
+    <!--</listener>-->
 
     <listener>
         <listener-class>
-            org.jboss.resteasy.plugins.guice.GuiceResteasyBootstrapServletContextListener
+            com.donc.guice.AppServletModule
         </listener-class>
     </listener>
 
     <servlet>
-        <servlet-name>Resteasy</servlet-name>
+        <servlet-name>ResteasyGuice</servlet-name>
         <servlet-class>
             org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
         </servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>Resteasy</servlet-name>
+        <servlet-name>ResteasyGuice</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
 
