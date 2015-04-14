@@ -6,20 +6,28 @@
             <property name="javax.persistence.spi.PersistenceProvider" value="org.hibernate.jpa.HibernatePersistenceProvider" />
             <!-- HSQL -->
             <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" />
+            <!-- Pooling does not work with hsql file database below -->
             <!--<property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:hsql://localhost:9001/rest_learn" />-->
             <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:testdb" />
             <property name="javax.persistence.jdbc.username" value="SA"/>
             <property name="javax.persistence.jdbc.password" value=""/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
-            <property name="hibernate.id.new_generator_mappings" value="true"/>
 
             <!-- PSQL -->
             <!--<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />-->
             <!--<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/rest_learn?user=donovan" />-->
+            <!--<property name="javax.persistence.query.timeout" value="30000" />-->
             <!--<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL9Dialect"/>-->
-            <!--<property name="hibernate.hbm2ddl.auto" value="create-drop" />-->
-            <!--<property name="hibernate.id.new_generator_mappings" value="true"/>-->
+
+            <!-- Common hibernate properties -->
+            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+            <property name="hibernate.id.new_generator_mappings" value="true"/>
+            <property name="hibernate.connection.pool_size" value="10" />
+            <property name="hibernate.c3p0.min_size" value="1"/>
+            <property name="hibernate.c3p0.max_size" value="10" />
+            <property name="hibernate.c3p0.timeout" value="1000" />
+            <property name="hibernate.c3p0.max_statements" value="10" />
+
         </properties>
     </persistence-unit>
 </persistence>

@@ -7,6 +7,8 @@ import com.google.inject.persist.Transactional;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
+import javax.ws.rs.BadRequestException;
 
 /**
  * Created by donovan on 15/04/09.
@@ -42,8 +44,9 @@ public class TestServiceImpl implements TestService {
     @Transactional
     public void delete(int id) {
         TestTable tt = em.find(TestTable.class, id);
-//        if (tt==null)
-//            throw new RuntimeException("TestTable with id=" + id + " not found");
+        // What should we do here if entities are not found?? How should it be handled
+        if (tt==null)
+            throw new EntityNotFoundException("TestTable with id=" + id + " not found");
         em.remove(tt);
     }
 

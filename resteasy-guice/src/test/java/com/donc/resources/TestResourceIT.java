@@ -3,6 +3,7 @@ package com.donc.resources;
 import com.donc.entities.TestTable;
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 import javax.ws.rs.client.ClientBuilder;
@@ -49,7 +50,7 @@ public class TestResourceIT {
             TestTable result = client.build().target(URI.create(location)).request().get(TestTable.class);
             assertEquals("Expected text value does not match", "testTable", result.getText());
         } else {
-            assertFalse("Failed to created object", false);
+            fail("Failed to created object");
         }
     }
 
@@ -63,12 +64,36 @@ public class TestResourceIT {
         if (response.getStatus()==Response.Status.CREATED.getStatusCode()) {
             String location = response.getHeaders().get("Location").get(0).toString();
             TestTable result = client.build().target(URI.create(location)).request().get(TestTable.class);
-            assertEquals("Expected text value does not match", "testTable", result.getText());
             result.setText("newText");
-            client.build().target(urlString).request().put(Entity.entity(result, MediaType.APPLICATION_JSON));
+            response = client.build().target(urlString + "/" +result.getId()).request().put(Entity.entity(result, MediaType.APPLICATION_JSON));
+            if (response.getStatus()!=Response.Status.OK.getStatusCode() && response.getStatus()!=Response.Status.NO_CONTENT.getStatusCode())
+                fail("Failed to update object");
+            else
+                assertTrue(true);
 
         } else {
             assertFalse("Failed to created object", false);
+        }
+    }
+
+
+    @Test
+    public void testDelete() throws Exception {
+        TestTable tt = new TestTable();
+        tt.setText("testDelete");
+        Response response = client.build().target(urlString).request()
+                .post(Entity.entity(tt, MediaType.APPLICATION_JSON));
+        if (response.getStatus()==Response.Status.CREATED.getStatusCode()) {
+            String location = response.getHeaders().get("Location").get(0).toString();
+            TestTable result = client.build().target(URI.create(location)).request().get(TestTable.class);
+            response = client.build().target(urlString + "/" + 10).request().delete();
+            if (response.getStatus()!=Response.Status.NO_CONTENT.getStatusCode() && response.getStatus()!=Response.Status.OK.getStatusCode())
+                fail("Failed to delete object");
+            else
+                assertTrue(true);
+
+        } else {
+            fail("Failed to created object");
         }
 
     }
