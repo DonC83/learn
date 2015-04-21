@@ -18,7 +18,7 @@ import java.net.URI;
 public class TestResourceIT {
 
     private ClientBuilder client;
-    private static final String urlString = "http://localhost:8080/hello/test";
+    private static final String urlString = "http://localhost:8080/resteasy-guice/hello/test";
 
     @Before
     public void setUp() throws Exception {
@@ -86,7 +86,7 @@ public class TestResourceIT {
         if (response.getStatus()==Response.Status.CREATED.getStatusCode()) {
             String location = response.getHeaders().get("Location").get(0).toString();
             TestTable result = client.build().target(URI.create(location)).request().get(TestTable.class);
-            response = client.build().target(urlString + "/" + 10).request().delete();
+            response = client.build().target(urlString + "/" + result.getId()).request().delete();
             if (response.getStatus()!=Response.Status.NO_CONTENT.getStatusCode() && response.getStatus()!=Response.Status.OK.getStatusCode())
                 fail("Failed to delete object");
             else
@@ -101,7 +101,7 @@ public class TestResourceIT {
     @Test
     public void testGetHello() throws Exception {
         ClientBuilder client = ClientBuilder.newBuilder();
-        String response = client.build().target("http://localhost:8080/hello/donovan").request().get(String.class);
+        String response = client.build().target("http://localhost:8080/resteasy-guice/hello/donovan").request().get(String.class);
         assertEquals("Hello donovan", response);
     }
 }
