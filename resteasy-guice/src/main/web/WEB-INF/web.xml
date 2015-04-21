@@ -50,4 +50,28 @@
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
 
+
+
+    <!--<security-constraint>-->
+        <!--<web-resource-collection>-->
+            <!--<web-resource-name>customer creation</web-resource-name>-->
+            <!--<url-pattern>/services/customers</url-pattern>-->
+            <!--<http-method>POST</http-method> //take this out to secure all methods-->
+        <!--</web-resource-collection>-->
+        <!--<auth-constraint>-->
+            <!--<role-name>admin</role-name>-->
+        <!--</auth-constraint>-->
+         <!--Add this to enforce HTTPS -->
+        <!--<user-data-constraint>-->
+            <!--<transport-guarantee>CONFIDENTIAL</transport-guarantee>-->
+        <!--</user-data-constraint>-->
+    <!--</security-constraint>-->
+    <!--<login-config>-->
+        <!--<auth-method>BASIC</auth-method>-->
+        <!--<realm-name>jaxrs</realm-name>-->
+    <!--</login-config>-->
+    <!--<security-role>-->
+        <!--<role-name>admin</role-name>-->
+    <!--</security-role>-->
+
 </web-app>
