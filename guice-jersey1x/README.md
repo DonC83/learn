@@ -1,4 +1,4 @@
-## README
+## guice-jersey1x
 
 This project is an example of how I setup a RESTful application using Jersey 1.x and Guice 3.0.
 I use Guice as the DI framework for injection purposes.

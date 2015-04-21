@@ -8,6 +8,8 @@
 * Tomcat
 * Maven
 
+## Problems 
+Should you be viewing these examples and encounter problems or question, please create an issue.
 
 
 #### JDK hints 
