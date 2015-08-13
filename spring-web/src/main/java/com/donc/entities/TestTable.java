@@ -1,8 +1,7 @@
-package donc.entities;
+package com.donc.entities;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import javax.persistence.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -12,6 +11,9 @@ import java.sql.SQLException;
 @Entity
 @Table(name = "testtable")
 @SequenceGenerator(name = "SEQ_GEN", sequenceName = "testtable_seq", allocationSize = 1, initialValue = 1)
+@NamedQueries({
+        @NamedQuery(name = "TestTable.getAll", query = "select o from TestTable o")
+})
 public class TestTable {
 
     private int id;

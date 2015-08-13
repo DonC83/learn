@@ -5,5 +5,6 @@ package com.donc;
  */
 public interface MessageService {
 
+    String getMessage();
 
 }

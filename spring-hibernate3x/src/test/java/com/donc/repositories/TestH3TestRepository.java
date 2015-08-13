@@ -1,6 +1,6 @@
 package com.donc.repositories;
 
-import com.donc.config.HibernateConfig;
+import com.donc.config.Hibernate3Config;
 import com.donc.entities.TestTable;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,8 +17,8 @@ import static org.junit.Assert.*;
  * Created by donovan on 15/06/05.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = HibernateConfig.class)
-public class TestTestRepository {
+@ContextConfiguration(classes = Hibernate3Config.class)
+public class TestH3TestRepository {
 
     @Autowired
     private TestRepository testRepo;

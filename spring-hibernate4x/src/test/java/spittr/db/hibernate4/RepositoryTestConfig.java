@@ -7,14 +7,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
-import org.springframework.orm.hibernate3.HibernateTransactionManager;
-import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
+import org.springframework.orm.hibernate4.HibernateTransactionManager;
+import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
 
 import javax.inject.Inject;
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.util.Properties;
 
 /**
@@ -32,8 +33,8 @@ public class RepositoryTestConfig implements TransactionManagementConfigurer {
     public DataSource dataSource() {
         EmbeddedDatabaseBuilder edb = new EmbeddedDatabaseBuilder();
         edb.setType(EmbeddedDatabaseType.H2);
-        edb.addScript("spittr/db/hibernate3/schema.sql");
-        edb.addScript("spittr/db/hibernate3/test-data.sql");
+        edb.addScript("spittr/db/hibernate4/schema.sql");
+        edb.addScript("spittr/db/hibernate4/test-data.sql");
         EmbeddedDatabase embeddedDatabase = edb.build();
         return embeddedDatabase;
     }
@@ -47,14 +48,18 @@ public class RepositoryTestConfig implements TransactionManagementConfigurer {
 
     @Bean
     public SessionFactory sessionFactoryBean() {
-            AnnotationSessionFactoryBean lsfb = new AnnotationSessionFactoryBean();
+        try {
+            LocalSessionFactoryBean lsfb = new LocalSessionFactoryBean();
             lsfb.setDataSource(dataSource());
             lsfb.setPackagesToScan("spittr.domain");
             Properties props = new Properties();
             props.setProperty("dialect", "org.hibernate.dialect.H2Dialect");
             lsfb.setHibernateProperties(props);
-//            lsfb.afterPropertiesSet();
+            lsfb.afterPropertiesSet();
             SessionFactory object = lsfb.getObject();
             return object;
+        } catch (IOException e) {
+            return null;
+        }
     }
 }

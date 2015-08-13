@@ -3,4 +3,5 @@ out/
 *.ipr
 *.iml
 .log
-target/
+.DS_Store
+target

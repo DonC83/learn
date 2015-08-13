@@ -3,13 +3,11 @@ package com.donc.config;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
-import org.springframework.orm.hibernate3.HibernateTransactionManager;
-import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
+import org.springframework.orm.hibernate4.HibernateTransactionManager;
+import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
@@ -37,39 +35,38 @@ public class HibernateConfig implements TransactionManagementConfigurer {
         ds.setMinPoolSize(5);
         ds.setMaxPoolSize(10);
         ds.setMaxIdleTime(1000);
-
         ds.setUser("");
         ds.setPassword("");
         return ds;
     }
+
+
+    /**
+     * Notice that with Hibernate 4 you need to use the LocalSessionFactoryBean class
+     * and not the AnnotationSessionFactoryBean you use with Hibernate3
+     * @param dataSource
+     * @return
+     */
+    @Bean
+    public LocalSessionFactoryBean getSessionFactory(DataSource dataSource) {
+        LocalSessionFactoryBean sfb = new LocalSessionFactoryBean();
+        sfb.setPackagesToScan("com.donc.entities");
+        sfb.setDataSource(dataSource);
+        Properties props = new Properties();
+        props.put("dialect", "org.hibernate.dialect.PostgreSQLDialect");
+        props.put("hibernate.hbm2ddl.auto", "create");
+        sfb.setHibernateProperties(props);
+        return sfb;
+    }
+
 
     @Override
     public PlatformTransactionManager annotationDrivenTransactionManager() {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(sessionFactory);
         return transactionManager;
+
     }
 
-    @Bean
-    public AnnotationSessionFactoryBean getSessionFactory(DataSource dataSource) {
-        AnnotationSessionFactoryBean asfb = new AnnotationSessionFactoryBean();
-        asfb.setDataSource(dataSource);
-        asfb.setPackagesToScan("com.donc.entities");
-        Properties props = new Properties();
-        props.put("dialect", "org.hibernate.dialect.PostgreSQLDialect");
-        props.put("hibernate.hbm2ddl.auto", "create");
-        asfb.setHibernateProperties(props);
-        return asfb;
-    }
-
-    @Bean
-    public BeanPostProcessor persistenceTranslation() {
-        return new PersistenceExceptionTranslationPostProcessor();
-    }
-
-//    @Bean
-//    public TestRepository getTestRepository(SessionFactory sessionFactory) {
-//        return new TestRepositoryImpl(sessionFactory);
-//    }
 
 }
