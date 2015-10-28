@@ -1,6 +1,6 @@
 package com.donc;
 
-import com.donc.config.AppConfig;
+import com.donc.config.WebConfig;
 import com.donc.config.DataConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -9,15 +9,17 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  */
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
+
+
     @Override
     protected Class<?>[] getRootConfigClasses() {
         System.getProperties().put("spring.profiles.active", "dev");
-        return new Class<?>[] { AppConfig.class, DataConfig.class};
+        return new Class<?>[] { DataConfig.class};
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class<?>[0];
+        return new Class<?>[] { WebConfig.class };
     }
 
     @Override

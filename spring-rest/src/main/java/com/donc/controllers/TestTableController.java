@@ -4,7 +4,7 @@ import com.donc.dto.TestTableDTO;
 import com.donc.entities.TestTable;
 import com.donc.exceptions.NotFoundException;
 import com.donc.repo.TestTableRepo;
-import org.omg.CosNaming.NamingContextPackage.NotFound;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,18 +25,27 @@ public class TestTableController {
     @Autowired
     private TestTableRepo repo;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<TestTableDTO>> getTestTable() {
         List<TestTable> tt = repo.findAll();
         if (tt==null) {
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
         }
-        List<TestTableDTO> dtos = new ArrayList<>();
+
+        List<TestTableDTO> dtos = Lists.newArrayList();
         tt.forEach(testTable -> dtos.add(new TestTableDTO(testTable.getId(), testTable.getText())));
         return new ResponseEntity(dtos, HttpStatus.OK);
     }
 
-    @RequestMapping(value="/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/find", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<List<TestTableDTO>> getTextLike(@RequestParam(value = "text") String text) {
+        List<TestTable> testTables = repo.findByText(text);
+        List<TestTableDTO> dtos = Lists.newArrayList();
+        testTables.forEach(tt -> dtos.add(new TestTableDTO(tt.getId(), tt.getText())));
+        return new ResponseEntity(dtos, HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<TestTableDTO> getTestTable(@PathVariable int id) {
 
         TestTable tt = repo.findOne(id);
