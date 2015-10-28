@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Repository
 @Transactional
-public class JpaRepoImpl implements TestJpaRepo {
+public class JpaRepoImpl implements JpaRepo {
 
     @PersistenceContext
     private EntityManager em;

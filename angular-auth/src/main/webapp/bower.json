@@ -1,0 +1,27 @@
+{
+  "name": "angular-auth",
+  "version": "1.0.0",
+  "homepage": "https://github.com/DonC83/learn",
+  "authors": [
+    "DonC83 <donovan.chong@gmail.com>"
+  ],
+  "description": "Authentication Skeleton with Angular",
+  "main": "",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.7",
+    "angular-route": "~1.4.7",
+    "bootstrap": "~3.3.5"
+  }
+}

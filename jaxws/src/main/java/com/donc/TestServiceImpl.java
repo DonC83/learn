@@ -1,5 +1,6 @@
 package com.donc;
 
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 /**
@@ -11,6 +12,7 @@ import javax.jws.WebService;
 @WebService(endpointInterface = "com.donc.TestService")
 public class TestServiceImpl implements TestService{
 
+    @WebMethod
     public void testMethod(TestRequestObj obj) {
         System.out.println(obj.getId() + " " + obj.getName());
     }

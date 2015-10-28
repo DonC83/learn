@@ -7,8 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * Created by donovan on 15/06/09.
  */
-public interface JPARepo extends JpaRepository<TestTable, Integer> {
-
+public interface JpaRepo extends JpaRepository<TestTable, Integer>, JpaBaseRepo {
     TestTable findByText(String text);
 
 }

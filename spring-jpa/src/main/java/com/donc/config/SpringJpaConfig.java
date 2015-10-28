@@ -6,12 +6,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.TransactionManagementConfigurer;
 
+import javax.inject.Inject;
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 
@@ -19,7 +25,7 @@ import java.beans.PropertyVetoException;
  * Created by donovan on 15/06/08.
  */
 @Configuration
-@ComponentScan("com.donc.repo")
+@ComponentScan("com.donc.repo.springjpa")
 public class SpringJpaConfig {
 
 //    @Bean
@@ -82,6 +88,20 @@ public class SpringJpaConfig {
     @Bean
     public BeanPostProcessor persistenceTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
+    }
+
+
+    @Configuration
+    @EnableTransactionManagement
+    public static class TransactionConfig implements TransactionManagementConfigurer {
+        @Inject
+        private EntityManagerFactory emf;
+
+        public PlatformTransactionManager annotationDrivenTransactionManager() {
+            JpaTransactionManager transactionManager = new JpaTransactionManager();
+            transactionManager.setEntityManagerFactory(emf);
+            return transactionManager;
+        }
     }
 
 

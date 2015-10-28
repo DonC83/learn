@@ -2,6 +2,7 @@ package com.donc.entities;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import javax.persistence.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
