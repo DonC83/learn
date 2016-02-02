@@ -1,0 +1,16 @@
+init 0,0,north
+gps_report
+forward
+gps_report
+forward
+turn_right
+forward
+gps_report
+forward
+forward
+forward
+forward
+gps_report
+turn_right
+forward
+gps_report
