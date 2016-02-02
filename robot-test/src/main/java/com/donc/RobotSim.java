@@ -31,7 +31,7 @@ public class RobotSim {
                 (position.getX()==4 && position.getDirection()==DIRECTION.EAST && command== COMMAND.FORWARD)) {
             //do nothing
         } else if ((position.getY()==0 && position.getDirection()==DIRECTION.SOUTH && command== COMMAND.FORWARD) ||
-                (position.getX()==4 && position.getDirection()==DIRECTION.NORTH && command== COMMAND.FORWARD)) {
+                (position.getY()==4 && position.getDirection()==DIRECTION.NORTH && command== COMMAND.FORWARD)) {
             //do nothing
         } else {
 

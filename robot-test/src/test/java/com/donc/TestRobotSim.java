@@ -46,4 +46,37 @@ public class TestRobotSim {
         robotSim.move(RobotSim.COMMAND.FORWARD);
         assertEquals("3,3,NORTH", robotSim.getGPSReport());
     }
+
+
+    @Test
+    public void testOutofBoundsMovement() throws Exception {
+        robotSim.init(0,0, RobotSim.DIRECTION.SOUTH);
+        robotSim.move(RobotSim.COMMAND.FORWARD);
+        assertEquals("0,0,SOUTH", robotSim.getGPSReport());
+        robotSim.move(RobotSim.COMMAND.TURN_RIGHT);
+        robotSim.move(RobotSim.COMMAND.FORWARD);
+        assertEquals("0,0,WEST", robotSim.getGPSReport());
+
+        robotSim.init(0,4, RobotSim.DIRECTION.NORTH);
+        robotSim.move(RobotSim.COMMAND.FORWARD);
+        assertEquals("0,4,NORTH", robotSim.getGPSReport());
+        robotSim.move(RobotSim.COMMAND.TURN_LEFT);
+        robotSim.move(RobotSim.COMMAND.FORWARD);
+        assertEquals("0,4,WEST", robotSim.getGPSReport());
+
+        robotSim.init(4,0, RobotSim.DIRECTION.SOUTH);
+        robotSim.move(RobotSim.COMMAND.FORWARD);
+        assertEquals("4,0,SOUTH", robotSim.getGPSReport());
+        robotSim.move(RobotSim.COMMAND.TURN_LEFT);
+        robotSim.move(RobotSim.COMMAND.FORWARD);
+        assertEquals("4,0,EAST", robotSim.getGPSReport());
+
+        robotSim.init(4,4, RobotSim.DIRECTION.NORTH);
+        robotSim.move(RobotSim.COMMAND.FORWARD);
+        assertEquals("4,4,NORTH", robotSim.getGPSReport());
+        robotSim.move(RobotSim.COMMAND.TURN_RIGHT);
+        robotSim.move(RobotSim.COMMAND.FORWARD);
+        assertEquals("4,4,EAST", robotSim.getGPSReport());
+
+    }
 }
