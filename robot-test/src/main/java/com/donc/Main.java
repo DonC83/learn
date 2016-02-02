@@ -36,8 +36,10 @@ public class Main {
         }
     }
 
+
     public static void main(String[] args) {
         Main m = new Main();
+        //Assuming file input is received as a command line argument
         if (args.length>0) {
             try (BufferedReader br = new BufferedReader(new FileReader(args[0]))) {
                 String s;
