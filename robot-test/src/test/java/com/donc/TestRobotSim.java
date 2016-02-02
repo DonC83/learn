@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 /**
  * Created by donovan on 2016/02/02.
  */
-public class TestMain {
+public class TestRobotSim {
 
     private RobotSim robotSim;
 
